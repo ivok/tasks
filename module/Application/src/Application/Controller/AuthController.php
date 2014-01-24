@@ -29,7 +29,7 @@ class AuthController extends AbstractActionController
 
         $builder = new AnnotationBuilder($em);
 
-        $form = $builder->createForm($user);
+        $form = $builder->createForm('Application\Entity\User');
         $form->setHydrator(new DoctrineHydrator($em, 'Application\Entity\User'))->bind($user);
 
         $request = $this->getRequest();
@@ -37,25 +37,38 @@ class AuthController extends AbstractActionController
 
 
         if ($request->isPost()) {
-            $data = $request->getPost();
 
-            $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+            $form->setData($request->getPost());
 
-            $adapter = $authService->getAdapter();
-            $adapter->setIdentityValue($data->username);
-            $adapter->setCredentialValue($data->password);
-            $authResult = $authService->authenticate();
+            if($form->isValid())
+            {
+                $data = $request->getPost();
 
-            if ($authResult->isValid()) {
-                $message = "loged in";
-            } else {
-                $message = "Invalid data";
+                $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+
+                $adapter = $authService->getAdapter();
+                $adapter->setIdentityValue($data->username);
+                $adapter->setCredentialValue($data->password);
+                $authResult = $authService->authenticate();
+
+                if ($authResult->isValid())
+                {
+                    $identity = $authResult->getIdentity();
+                    $authService->getStorage()->write($identity);
+
+                    return $this->redirect()->toRoute('home');
+                }
+
+                return new ViewModel(array(
+                        'form' => $form,
+                        'message' => 'Invalid username or password',
+                    )
+                );
             }
         }
 
         return new ViewModel(array(
             'form' => $form,
-            'message' => $message,
         ));
     }
 } 

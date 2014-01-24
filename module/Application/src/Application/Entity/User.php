@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity
  * @ORM\Table(name="users")
  * @Annotation\Name("user")
+ * @Annotation\Attributes({"class":"form-horizontal"})
  */
 class User
 {
@@ -55,7 +56,7 @@ class User
 
     /**
      * @Annotation\Type("Zend\Form\Element\Submit")
-     * @Annotation\Attributes({"value":"Submit", "class":"btn btn"})
+     * @Annotation\Attributes({"value":"Submit", "class":"btn btn-primary"})
      */
     protected $submit;
 
