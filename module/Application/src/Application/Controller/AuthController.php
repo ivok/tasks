@@ -35,6 +35,7 @@ class AuthController extends AbstractActionController
         $request = $this->getRequest();
 
 
+
         if ($request->isPost()) {
             $data = $request->getPost();
 
