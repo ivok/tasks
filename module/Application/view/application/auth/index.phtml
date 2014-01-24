@@ -1,0 +1,24 @@
+
+<div class="container">
+    <div class="row">
+        <h1>Auth</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <?php
+            $form = $this->form;
+
+            $form->prepare();
+
+            echo $this->form()->openTag($form);
+            echo $this->formRow($form->get('username'));
+            echo $this->formRow($form->get('password'));
+            echo $this->formSubmit($form->get('submit'));
+            echo $this->form()->closeTag();
+            ?>
+            <?php if ($this->message) echo $this->message ?>
+        </div>
+
+    </div>
+</div>
