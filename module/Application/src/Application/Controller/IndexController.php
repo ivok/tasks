@@ -19,7 +19,7 @@ class IndexController extends AbstractActionController
         $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
 
         if (!$auth->hasIdentity()) {
-            return $this->redirect()->toRoute('auth');
+            return $this->redirect()->toRoute('login');
         }
 
         return new ViewModel();

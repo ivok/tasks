@@ -50,6 +50,12 @@ class User
     protected $password;
 
     /**
+     * @Annotation\Type("Zend\Form\Element\Password")
+     * @Annotation\Attributes({"class":"form-control"})
+     */
+    protected $confirmPassword;
+
+    /**
      * @Annotation\Type("Zend\Form\Element\Checkbox")
      */
     protected $remember;

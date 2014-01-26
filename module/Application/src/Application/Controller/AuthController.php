@@ -19,7 +19,13 @@ use Zend\Session\SessionManager;
 
 class AuthController extends AbstractActionController
 {
+
     public function indexAction()
+    {
+        return new ViewModel();
+    }
+
+    public function loginAction()
     {
         $message = null;
 
@@ -31,12 +37,14 @@ class AuthController extends AbstractActionController
 
         $form = $builder->createForm('Application\Entity\User');
         $form->setHydrator(new DoctrineHydrator($em, 'Application\Entity\User'))->bind($user);
+        $form->get('confirmPassword')->setValue("default_value");
 
         $request = $this->getRequest();
 
 
-
         if ($request->isPost()) {
+
+            $request->setContent('confirmPassword', 'sadasad');
 
             $form->setData($request->getPost());
 
@@ -69,6 +77,43 @@ class AuthController extends AbstractActionController
 
         return new ViewModel(array(
             'form' => $form,
+        ));
+    }
+
+    public function registerAction()
+    {
+        $message = null;
+
+        $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+
+        $user = new User();
+
+        $builder = new AnnotationBuilder($em);
+
+        $form = $builder->createForm('Application\Entity\User');
+        $form->setHydrator(new DoctrineHydrator($em, 'Application\Entity\User'))->bind($user);
+
+        $request = $this->getRequest();
+
+        if($request->isPost())
+        {
+            $form->setData($request->getPost());
+
+            if ($form->isValid())
+            {
+                echo "validation successful";
+            }
+            else
+            {
+                return new ViewModel(array(
+                    'form' => $form,
+                    'message' => 'Invalid fields',
+                ));
+            }
+        }
+
+        return new ViewModel(array(
+            'form'=>$form,
         ));
     }
 } 
