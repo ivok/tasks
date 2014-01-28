@@ -34,7 +34,7 @@ class User
      * @Annotation\Type("Zend\Form\Element\Text")
      * @Annotation\Required({"required":"true" })
      * @Annotation\Filter({"name":"StripTags"})
-     * @Annotation\Validator({"name":"StringLength", "options":{"min":"1"}})
+     * @Annotation\Validator({"name":"StringLength", "options":{"min":"2"}})
      * @Annotation\Options({"class":"Username:"})
      * @Annotation\Attributes({"class":"form-control"})
      */

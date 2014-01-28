@@ -44,7 +44,7 @@ class AuthController extends AbstractActionController
                 $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
                 $adapter = $authService->getAdapter();
                 $adapter->setIdentityValue($data->username);
-                $adapter->setCredentialValue($data->password);
+                $adapter->setCredentialValue(md5($data->password));
                 $authResult = $authService->authenticate();
 
                 if ($authResult->isValid())
@@ -52,7 +52,8 @@ class AuthController extends AbstractActionController
                     echo "result valid";
                     $identity = $authResult->getIdentity();
                     $authService->getStorage()->write($identity);
-
+                    $session = new SessionManager();
+                    $session->rememberMe();
                     return $this->redirect()->toRoute('home');
                 }
 
@@ -71,38 +72,54 @@ class AuthController extends AbstractActionController
 
     public function registerAction()
     {
-        $message = null;
-
         $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-
         $user = new User();
-
         $builder = new AnnotationBuilder($em);
 
         $form = $builder->createForm('Application\Entity\User');
         $form->setHydrator(new DoctrineHydrator($em, 'Application\Entity\User'))->bind($user);
-
+        $form->setValidationGroup('username', 'password', 'confirmPassword');
         $request = $this->getRequest();
 
         if($request->isPost())
         {
             $form->setData($request->getPost());
+            $data = $request->getPost();
 
             if ($form->isValid())
             {
-                echo "validation successful";
-            }
-            else
-            {
+                if($em->getRepository('Application\Entity\User')->findOneBy(array('username' => $data->username)) !== null)
+                {
+                    return new ViewModel(array(
+                        'form' => $form,
+                        'message' => 'Username already exists',
+                        'hideForm' => false,
+                    ));
+                }
+
+                if($data->password != $data->confirmPassword)
+                {
+                    return new ViewModel(array(
+                        'form' => $form,
+                        'message' => 'Passwords do not match',
+                        'hideForm' => false,
+                    ));
+                }
+
+                $em->persist($user);
+                $em->flush();
+
                 return new ViewModel(array(
-                    'form' => $form,
-                    'message' => 'Invalid fields',
+                    'form'=>$form,
+                    'hideForm' => true,
+                    'message' => 'Registration successful',
                 ));
             }
         }
 
         return new ViewModel(array(
             'form'=>$form,
+            'hideForm' => false,
         ));
     }
 } 

@@ -2,6 +2,7 @@
     <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
+            <?php if($this->hideForm == false) : ?>
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <?php echo $this->translate('Registration')?>
@@ -56,10 +57,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel-footer">
-                    Provide username and password to login to system
-                </div>
             </div>
+            <?php else : ?>
+                <div class="alert alert-dismissable alert-success">
+                    <?php echo $this->translate($this->message) ?>
+                    <a href=""><?php echo $this->translate('You can login') ?></a>
+                </div>
+            <?php endif ?>
         </div>
 
     </div>
