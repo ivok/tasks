@@ -44,17 +44,10 @@
                             ->setMaxDepth(0)
                             ->setUlClass('nav navbar-nav');
                     ?>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="<?php echo $this->url('login'); ?>">Login</a></li>
-                        <li><a href="<?php echo $this->url('register'); ?>">Register</a></li>
-                    </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
         <div class="container">
-            <ul class="breadcrumb">
-                <?php echo $this->navigation('navigation')->breadcrumbs()->setMinDepth(0); // <-- Add this!! ?>
-            </ul>
             <?php echo $this->content; ?>
             <hr>
             <footer>

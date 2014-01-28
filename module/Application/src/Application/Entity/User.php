@@ -51,6 +51,7 @@ class User
 
     /**
      * @Annotation\Type("Zend\Form\Element\Password")
+     * @Annotation\Required({"required":"true" })
      * @Annotation\Attributes({"class":"form-control"})
      */
     protected $confirmPassword;
