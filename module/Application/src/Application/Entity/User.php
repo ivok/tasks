@@ -36,7 +36,7 @@ class User
      * @Annotation\Filter({"name":"StripTags"})
      * @Annotation\Validator({"name":"StringLength", "options":{"min":"2"}})
      * @Annotation\Options({"class":"Username:"})
-     * @Annotation\Attributes({"class":"form-control"})
+     * @Annotation\Attributes({"class":"form-control input-sm"})
      */
     protected $username;
 
@@ -45,14 +45,14 @@ class User
      * @Annotation\Type("Zend\Form\Element\Password")
      * @Annotation\Required({"required":"true" })
      * @Annotation\Validator({"name":"StringLength", "options":{"min":"6"}})
-     * @Annotation\Attributes({"class":"form-control"})
+     * @Annotation\Attributes({"class":"form-control input-sm"})
      */
     protected $password;
 
     /**
      * @Annotation\Type("Zend\Form\Element\Password")
      * @Annotation\Required({"required":"true" })
-     * @Annotation\Attributes({"class":"form-control"})
+     * @Annotation\Attributes({"class":"form-control input-sm"})
      */
     protected $confirmPassword;
 
@@ -63,7 +63,7 @@ class User
 
     /**
      * @Annotation\Type("Zend\Form\Element\Submit")
-     * @Annotation\Attributes({"value":"Submit", "class":"btn btn-primary"})
+     * @Annotation\Attributes({"value":"Submit", "class":"btn btn-primary btn-sm"})
      */
     protected $submit;
 

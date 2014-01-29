@@ -59,7 +59,7 @@ class AuthController extends AbstractActionController
 
                 return new ViewModel(array(
                         'form' => $form,
-                        'message' => 'Invalid credentials',
+                        'message' => 'Invalid username or password',
                     )
                 );
             }

@@ -21,7 +21,7 @@ class Module
         $moduleRouteListener->attach($eventManager);
 
         $translator = $e->getApplication()->getServiceManager()->get('translator');
-        $translator->setLocale('en_US')->setFallbackLocale('en_US');
+        $translator->setLocale('bg_BG')->setFallbackLocale('en_US');
     }
 
     public function getConfig()

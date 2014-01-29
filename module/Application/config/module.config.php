@@ -158,10 +158,6 @@ return array(
     'navigation' => array(
         'default' => array(
             array(
-                'label' => 'Home',
-                'route' => 'home',
-            ),
-            array(
                 'label' => 'Login',
                 'route' => 'login',
             ),
