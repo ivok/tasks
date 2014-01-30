@@ -69,7 +69,7 @@
                 <div class="alert alert-dismissable alert-success">
                     <span class="glyphicon glyphicon-thumbs-up"></span>
                     <?php echo $this->translate($this->message) ?>
-                    <a href=""><?php echo $this->translate('You can login') ?></a>
+                    <a href="<?php $this->url('login')?>"><?php echo $this->translate('You can login') ?></a>
                 </div>
             <?php endif ?>
         </div>

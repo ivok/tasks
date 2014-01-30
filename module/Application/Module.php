@@ -22,6 +22,7 @@ class Module
 
         $translator = $e->getApplication()->getServiceManager()->get('translator');
         $translator->setLocale('bg_BG')->setFallbackLocale('en_US');
+
     }
 
     public function getConfig()

@@ -1,1 +1,69 @@
 <h1>Home</h1>
+<div class="panel panel-default">
+    <div class="panel-heading"><?php echo $this->translate('Tasks assigned to me') ?></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-3"><?php echo $this->translate('From date')?></div>
+            <div class="col-sm-3"><?php echo $this->translate('Task name')?></div>
+            <div class="col-sm-3"><?php echo $this->translate('Current status')?></div>
+        </div>
+        <hr>
+        <?php foreach ($this->tickets as $ticket): ?>
+            <div class="row">
+                <div class="col-sm-3"><?php echo $ticket->getDate()->format('d-m-Y H:i') ?></div>
+                <div class="col-sm-3"><a
+                        href="<?php echo $this->url . "task/" . $ticket->getId() ?>"><?php echo $ticket->getName(); ?></a>
+                </div>
+                <div class="col-sm-3"><?php echo $ticket->getStatus(); ?></div>
+            </div>
+        <?php endforeach ?>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><?php echo $this->translate('All pending tasks') ?></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-3"><?php echo $this->translate('From date')?></div>
+            <div class="col-sm-3"><?php echo $this->translate('Task name')?></div>
+            <div class="col-sm-3"><?php echo $this->translate('Current status')?></div>
+            <div class="col-sm-3"><?php echo $this->translate('Assigned to')?></div>
+        </div>
+        <hr>
+        <?php foreach ($this->pendingTasks as $ticket): ?>
+        <div class="row">
+            <div class="col-sm-3"><?php echo $ticket->getDate()->format('d-m-Y H:i') ?></div>
+            <div class="col-sm-3"><a href="<?php echo $this->url . "task/" . $ticket->getId() ?>"><?php echo $ticket->getName(); ?></a></div>
+            <div class="col-sm-3"><?php echo $ticket->getStatus(); ?></div>
+            <?php if ($ticket->getUser()) : ?>
+                <div class="col-sm-3"><a href=""><?php echo $ticket->getUser()->getUsername() ?></a></div>
+            <?php else : ?>
+                <div class="col-sm-3"><a href=""><?php $this->translate('No user...') ?></a></div>
+            <?php endif ?>
+        </div>
+        <?php endforeach ?>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><?php echo $this->translate('Resolved tasks') ?></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-3"><?php echo $this->translate('From date')?></div>
+            <div class="col-sm-3"><?php echo $this->translate('Task name')?></div>
+            <div class="col-sm-3"><?php echo $this->translate('Current status')?></div>
+            <div class="col-sm-3"><?php echo $this->translate('Resolved by')?></div>
+        </div>
+        <hr>
+        <?php foreach ($this->resolvedTasks as $ticket): ?>
+            <div class="row">
+                <div class="col-sm-3"><?php echo $ticket->getDate()->format('d-m-Y H:i') ?></div>
+                <div class="col-sm-3"><a href="<?php echo $this->url . "task/" . $ticket->getId() ?>"><?php echo $ticket->getName(); ?></a></div>
+                <div class="col-sm-3"><?php echo $ticket->getStatus(); ?></div>
+                <?php if ($ticket->getUser()) : ?>
+                    <div class="col-sm-3"><a href=""><?php echo $ticket->getUser()->getUsername() ?></a></div>
+                <?php else : ?>
+                    <div class="col-sm-3"><a href=""><?php $this->translate('n/a') ?></a></div>
+                <?php endif ?>
+            </div>
+        <?php endforeach ?>
+    </div>
+</div>

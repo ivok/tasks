@@ -49,11 +49,14 @@ class AuthController extends AbstractActionController
 
                 if ($authResult->isValid())
                 {
-                    echo "result valid";
                     $identity = $authResult->getIdentity();
                     $authService->getStorage()->write($identity);
-                    $session = new SessionManager();
-                    $session->rememberMe();
+
+                    if($data->remember == 1)
+                    {
+                        $session = new SessionManager();
+                        $session->rememberMe();
+                    }
                     return $this->redirect()->toRoute('home');
                 }
 
@@ -121,5 +124,10 @@ class AuthController extends AbstractActionController
             'form'=>$form,
             'hideForm' => false,
         ));
+    }
+
+    public function logoutAction()
+    {
+
     }
 } 

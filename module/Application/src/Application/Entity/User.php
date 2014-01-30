@@ -79,6 +79,14 @@ class User
     }
 
     /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @param mixed $password
      */
     public function setPassword($password)
@@ -108,6 +116,14 @@ class User
     public function getUsername()
     {
         return $this->username;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
     }
 
 

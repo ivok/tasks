@@ -74,6 +74,11 @@ div.container a.brand {
     padding: 10px;
 }
 
+.input-xs {
+    border-radius: 2px;
+    padding: 2px;
+}
+
 .panel, .panel-heading, .panel-footer {
     border-radius: 0px;
 }
