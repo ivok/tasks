@@ -1,14 +1,171 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Bulgarian\n"
-"POT-Creation-Date: 2014-01-25 23:48+0200\n"
-"PO-Revision-Date: 2014-01-25 23:51+0200\n"
+"Project-Id-Version: bg_BG\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-29 21:50+0200\n"
+"PO-Revision-Date: 2014-01-29 21:50+0200\n"
 "Last-Translator: Ivo Kuzov <ivokuzov@gmail.com>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;translate\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Country: BULGARIA\n"
+"X-Poedit-SearchPath-0: /var/www/tasks/module/Application\n"
 
+#: /var/www/tasks/module/Application/view/layout/layout.phtml:6
+#: /var/www/tasks/module/Application/view/layout/layout.phtml:37
+msgid "Skeleton Application"
+msgstr "Task manager"
+
+#: /var/www/tasks/module/Application/view/error/404.phtml:1
+msgid "A 404 error occurred"
+msgstr ""
+
+#: /var/www/tasks/module/Application/view/error/404.phtml:10
+msgid "The requested controller was unable to dispatch the request."
+msgstr ""
+
+#: /var/www/tasks/module/Application/view/error/404.phtml:13
+msgid "The requested controller could not be mapped to an existing controller class."
+msgstr ""
+
+#: /var/www/tasks/module/Application/view/error/404.phtml:16
+msgid "The requested controller was not dispatchable."
+msgstr ""
+
+#: /var/www/tasks/module/Application/view/error/404.phtml:19
+msgid "The requested URL could not be matched by routing."
+msgstr ""
+
+#: /var/www/tasks/module/Application/view/error/404.phtml:22
+msgid "We cannot determine at this time why a 404 was generated."
+msgstr ""
+
+#: /var/www/tasks/module/Application/view/error/404.phtml:34
+msgid "Controller"
+msgstr ""
+
+#: /var/www/tasks/module/Application/view/error/404.phtml:41
+#, php-format
+msgid "resolves to %s"
+msgstr ""
+
+#: /var/www/tasks/module/Application/view/error/404.phtml:53
+#: /var/www/tasks/module/Application/view/error/index.phtml:8
+msgid "Additional information"
+msgstr "Допълнителна информация"
+
+#: /var/www/tasks/module/Application/view/error/404.phtml:56
+#: /var/www/tasks/module/Application/view/error/404.phtml:80
+#: /var/www/tasks/module/Application/view/error/index.phtml:11
+#: /var/www/tasks/module/Application/view/error/index.phtml:35
+msgid "File"
+msgstr "Файл"
+
+#: /var/www/tasks/module/Application/view/error/404.phtml:60
+#: /var/www/tasks/module/Application/view/error/404.phtml:84
+#: /var/www/tasks/module/Application/view/error/index.phtml:15
+#: /var/www/tasks/module/Application/view/error/index.phtml:39
+msgid "Message"
+msgstr "Съобщение"
+
+#: /var/www/tasks/module/Application/view/error/404.phtml:64
+#: /var/www/tasks/module/Application/view/error/404.phtml:88
+#: /var/www/tasks/module/Application/view/error/index.phtml:19
+#: /var/www/tasks/module/Application/view/error/index.phtml:43
+msgid "Stack trace"
+msgstr ""
+
+#: /var/www/tasks/module/Application/view/error/404.phtml:74
+#: /var/www/tasks/module/Application/view/error/index.phtml:29
+msgid "Previous exceptions"
+msgstr ""
+
+#: /var/www/tasks/module/Application/view/error/404.phtml:103
+#: /var/www/tasks/module/Application/view/error/index.phtml:58
+msgid "No Exception available"
+msgstr ""
+
+#: /var/www/tasks/module/Application/view/error/index.phtml:1
+msgid "An error occurred"
+msgstr "Възникна грешка"
+
+#: /var/www/tasks/module/Application/view/application/auth/login.phtml:7
+#: /var/www/tasks/module/Application/view/application/auth/login.phtml:34
+#: /var/www/tasks/module/Application/view/application/auth/index.phtml:3
+msgid "Login"
+msgstr "Вход"
+
+#: /var/www/tasks/module/Application/view/application/auth/login.phtml:19
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:20
+msgid "Username"
+msgstr "Потребителско име"
+
+#: /var/www/tasks/module/Application/view/application/auth/login.phtml:26
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:27
+msgid "Password"
+msgstr "Парола"
+
+#: /var/www/tasks/module/Application/view/application/auth/login.phtml:38
+msgid "Keep me signed in"
+msgstr "Запомни ме"
+
+#: /var/www/tasks/module/Application/view/application/auth/login.phtml:48
+msgid "Invalid username or password"
+msgstr "Невалидно потребителско име или парола"
+
+#: /var/www/tasks/module/Application/view/application/auth/index.phtml:2
+msgid "Only users allowed! Please select..."
+msgstr "Само потребители"
+
+#: /var/www/tasks/module/Application/view/application/auth/index.phtml:4
+msgid "Sign Up"
+msgstr "Регистрация"
+
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:8
+msgid "Registration"
+msgstr "Регистрация"
+
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:34
+msgid "Confirm Password"
+msgstr "Потвърди парола"
+
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:42
+msgid "Sign up"
+msgstr "Регистрация"
+
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:52
+msgid "Home"
+msgstr "Начало"
+
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:53
+msgid "Register"
+msgstr "Регистрация"
+
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:54
+msgid "Passwords do not match"
+msgstr "Паролите не съвпадат"
+
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:55
+msgid "Registration successful"
+msgstr "Регистрацията е успешна"
+
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:56
+msgid "Username already exists"
+msgstr "Потребителското име съществува"
+
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:70
+msgid "You can login"
+msgstr "Вие можете да се логнете"
+
+#~ msgid "All rights reserved."
+#~ msgstr "Всички права запазени"
+
+#~ msgid "Invalid credentials"
+#~ msgstr "Невалидна "
+
+#~ msgid "Welcome to %sZend Framework 2%s"
+#~ msgstr "Добре дошли"

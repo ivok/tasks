@@ -50,15 +50,53 @@ class Ticket
      */
     protected $date;
 
-    /** Getters */
-    public function get($property)
+    /**
+     * @return mixed
+     */
+    public function getDate()
     {
-        return $this->$property;
+        return $this->date;
     }
 
-    /** Setters */
-    public function set($property, $value)
+    /**
+     * @return mixed
+     */
+    public function getDescription()
     {
-        $this->$property = $value;
+        return $this->description;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+
 }

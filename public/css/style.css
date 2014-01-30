@@ -1,3 +1,11 @@
+a{
+    -webkit-transition: all 600ms ease;
+    -moz-transition: all 600ms ease;
+    -ms-transition: all 600ms ease;
+    -o-transition: all 600ms ease;
+    transition: all 600ms ease;
+}
+
 body {
     padding-top: 60px;
     padding-bottom: 40px;
@@ -45,4 +53,32 @@ div.container a.brand {
 .form-horizontal ul > li {
     line-height: 26px;
     color: orangered;
+}
+
+.lbl-sm {
+    padding-top: 4px!important;
+    font-weight: normal!important;
+}
+
+.navbar {
+    min-height: 42px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.navbar-nav > li > a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.navbar-brand {
+    padding: 10px;
+}
+
+.input-xs {
+    border-radius: 2px;
+    padding: 2px;
+}
+
+.panel, .panel-heading, .panel-footer {
+    border-radius: 0px;
 }

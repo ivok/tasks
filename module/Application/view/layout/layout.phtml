@@ -34,7 +34,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Skeleton Application') ?></a>
+                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;<?php echo $this->translate('Skeleton Application') ?></a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <?php
@@ -42,23 +42,21 @@
                             ->menu()
                             ->setMinDepth(0)
                             ->setMaxDepth(0)
-                            ->setUlClass('nav navbar-nav');
-                    ?>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="<?php echo $this->url('login'); ?>">Login</a></li>
-                        <li><a href="<?php echo $this->url('register'); ?>">Register</a></li>
-                    </ul>
-                </div><!--/.nav-collapse -->
+                            ->setUlClass('nav navbar-nav');?>
+                </div>
             </div>
         </nav>
         <div class="container">
-            <ul class="breadcrumb">
-                <?php echo $this->navigation('navigation')->breadcrumbs()->setMinDepth(0); // <-- Add this!! ?>
-            </ul>
             <?php echo $this->content; ?>
             <hr>
             <footer>
-                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+                <div class="row">
+                    <div class="col-sm-10">
+                        &copy; 2005 - <?php echo date('Y') ?> by Viscomp Ltd. Masarliev team
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+                </div>
             </footer>
         </div> <!-- /container -->
         <?php echo $this->inlineScript() ?>

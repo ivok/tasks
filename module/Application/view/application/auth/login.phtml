@@ -2,9 +2,9 @@
     <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
-            <div class="panel panel-primary">
+            <div class="panel panel-default">
                 <div class="panel-heading">
-                    Authentication
+                    <?php echo $this->translate('Login') ?>
                 </div>
                 <div class="panel-body">
                     <?php
@@ -16,14 +16,14 @@
                             <?php echo $this->form()->openTag($form); ?>
                             <fieldset>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4">Username</label>
+                                    <label class="control-label col-sm-4 lbl-sm"><?php echo $this->translate('Username') ?></label>
 
                                     <div class="col-sm-8">
                                         <?php echo $this->formRow($form->get('username')); ?>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4">Password</label>
+                                    <label class="control-label col-sm-4 lbl-sm"><?php echo $this->translate('Password') ?></label>
 
                                     <div class="col-sm-8">
                                         <?php echo $this->formRow($form->get('password')); ?>
@@ -31,10 +31,11 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-8 pull-right">
+                                        <?php $form->get('submit')->setValue($this->translate('Login'))?>
                                         <?php echo $this->formSubmit($form->get('submit')); ?>
-                                        <label>
+                                        <label class="lbl-sm">
                                             <?php echo $this->formRow($form->get('remember')); ?>
-                                            Keep me signed in
+                                            <?php echo $this->translate('Keep me signed in') ?>
                                         </label>
                                     </div>
                                 </div>
@@ -43,7 +44,9 @@
                                         <div class="col-sm-8 pull-right">
                                             <div class="alert alert-dismissable alert-danger">
                                                 <button type="button" class="close" data-dismiss="alert">×</button>
-                                                <?php if ($this->message) echo $this->message; else echo 'Type username and password to gain access'; ?>
+                                                <span class="glyphicon glyphicon-thumbs-down"></span>
+                                                <?php echo $this->translate($this->message) ?>
+                                                <?php $this->translate('Invalid username or password')?>
                                             </div>
                                         </div>
                                     </div>
@@ -53,9 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel-footer">
-                    Provide username and password to login to system
-                </div>
+
             </div>
         </div>
 

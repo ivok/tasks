@@ -21,7 +21,21 @@ class IndexController extends AbstractActionController
         if (!$auth->hasIdentity()) {
             return $this->redirect()->toRoute('login');
         }
+        else
+        {
+            $identity = $auth->getIdentity();
+            $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+            $user = $em->find('Application\Entity\User', $identity->getId());
 
-        return new ViewModel();
+            $tickets = $user->getTickets();
+            $pendingTasks = $em->getRepository('Application\Entity\Ticket')->findBy(array('status'=>array('pending', 'opened')));
+            $resolvedTasks = $em->getRepository('Application\Entity\Ticket')->findBy(array('status'=>array('resolved')));
+
+            return new ViewModel(array(
+                'tickets' => $tickets,
+                'pendingTasks' => $pendingTasks,
+                'resolvedTasks' => $resolvedTasks,
+            ));
+        }
     }
 }
