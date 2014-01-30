@@ -11,6 +11,7 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class IndexController extends AbstractActionController
 {
