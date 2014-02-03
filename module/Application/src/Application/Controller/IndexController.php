@@ -25,16 +25,14 @@ class IndexController extends AbstractActionController
 
         if (!$auth->hasIdentity()) {
             return $this->redirect()->toRoute('login');
-        }
-        else
-        {
+        } else {
             $identity = $auth->getIdentity();
             $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
             $user = $em->find('Application\Entity\User', $identity->getId());
 
             $tickets = $user->getTickets();
-            $pendingTasks = $em->getRepository('Application\Entity\Ticket')->findBy(array('status'=>array('pending', 'opened')));
-            $resolvedTasks = $em->getRepository('Application\Entity\Ticket')->findBy(array('status'=>array('resolved')));
+            $pendingTasks = $em->getRepository('Application\Entity\Ticket')->findBy(array('status' => array('pending', 'opened')));
+            $resolvedTasks = $em->getRepository('Application\Entity\Ticket')->findBy(array('status' => array('resolved')));
 
 
             return new ViewModel(array(
@@ -42,9 +40,6 @@ class IndexController extends AbstractActionController
                 'pendingTasks' => $pendingTasks,
                 'resolvedTasks' => $resolvedTasks,
             ));
-
-            //sdfsdfsdfsdfs
-            //sdfsdfsdf
         }
     }
 }
