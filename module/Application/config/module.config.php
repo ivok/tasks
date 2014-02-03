@@ -174,7 +174,7 @@ return array(
                         'route' => 'home'
                     ),
                     array(
-                        'label' => 'Completed tasks',
+                        'label' => 'Completed tasks ',
                         'route' => 'home'
                     ),
                 ),
