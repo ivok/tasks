@@ -11,7 +11,11 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
+use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
+use Zend\Paginator\Paginator;
+
 
 class IndexController extends AbstractActionController
 {
@@ -31,6 +35,7 @@ class IndexController extends AbstractActionController
             $tickets = $user->getTickets();
             $pendingTasks = $em->getRepository('Application\Entity\Ticket')->findBy(array('status'=>array('pending', 'opened')));
             $resolvedTasks = $em->getRepository('Application\Entity\Ticket')->findBy(array('status'=>array('resolved')));
+
 
             return new ViewModel(array(
                 'tickets' => $tickets,
