@@ -10,6 +10,7 @@
 return array(
     'router' => array(
         'routes' => array(
+            //Index Controller
             'home' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -20,6 +21,62 @@ return array(
                     ),
                 ),
             ),
+            'users' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/users',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'users',
+                    ),
+                ),
+            ),
+            //Task Controller
+            'tasks' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/tasks',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Task',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'mytasks' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/mytasks',
+                            'defaults' => array(
+                                'controller' => 'Application\Controller\Task',
+                                'action' => 'mytasks'
+                            )
+                        ),
+                    ),
+                    'pending' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/pending',
+                            'defaults' => array(
+                                'controller' => 'Application\Controller\Task',
+                                'action' => 'pending'
+                            )
+                        ),
+                    ),
+                    'resolved' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/resolved',
+                            'defaults' => array(
+                                'controller' => 'Application\Controller\Task',
+                                'action' => 'resolved'
+                            )
+                        ),
+                    ),
+                ),
+            ),
+
+            //Auth controller
             'login' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -47,6 +104,27 @@ return array(
                     'defaults' => array(
                         'controller' => 'Application\Controller\Auth',
                         'action' => 'register',
+                    ),
+                ),
+            ),
+            'settings' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/settings',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Auth',
+                        'action' => 'settings',
+                    ),
+                ),
+            ),
+            // Project Controller
+            'projects' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/projects',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Project',
+                        'action' => 'index',
                     ),
                 ),
             ),
@@ -106,7 +184,9 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Task' => 'Application\Controller\TaskController',
             'Application\Controller\Auth' => 'Application\Controller\AuthController',
+            'Application\Controller\Project' => 'Application\Controller\ProjectController',
         ),
     ),
     'view_manager' => array(
@@ -159,30 +239,45 @@ return array(
         'default' => array(
             array(
                 'label' => 'Tasks',
-                'route' => 'home',
+                'route' => 'tasks/mytasks',
                 'pages' => array(
                     array(
-                        'label' => 'Create task',
-                        'route' => 'home'
+                        'label' => 'Assigned to me',
+                        'route' => 'tasks/mytasks'
                     ),
                     array(
-                        'label' => 'My tasks',
-                        'route' => 'login'
+                        'label' => 'All tasks',
+                        'route' => 'tasks'
                     ),
                     array(
                         'label' => 'Pending tasks',
-                        'route' => 'home'
+                        'route' => 'tasks/pending'
                     ),
                     array(
-                        'label' => 'Completed tasks ',
-                        'route' => 'home'
+                        'label' => 'Resolved tasks',
+                        'route' => 'tasks/resolved'
                     ),
                 ),
-
+            ),
+            array(
+                'label' => 'Projects',
+                'route' => 'projects',
+                'pages' => array(
+                    array(
+                        'label' => 'All projects',
+                        'route' => 'projects'
+                    ),
+                ),
             ),
             array(
                 'label' => 'Users',
-                'route' => 'home',
+                'route' => 'users',
+                'pages' => array(
+                    array(
+                        'label' => 'All users',
+                        'route' => 'users'
+                    ),
+                ),
             ),
         ),
     ),

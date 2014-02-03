@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg_BG\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-30 22:53+0200\n"
-"PO-Revision-Date: 2014-01-30 22:55+0200\n"
+"POT-Creation-Date: 2014-02-03 22:35+0200\n"
+"PO-Revision-Date: 2014-02-03 22:50+0200\n"
 "Last-Translator: Ivo Kuzov <ivokuzov@gmail.com>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -20,9 +20,37 @@ msgstr ""
 msgid "Skeleton Application"
 msgstr "Task manager"
 
+#: /var/www/tasks/module/Application/view/layout/layout.phtml:52
+msgid "Account"
+msgstr "Акаунт"
+
+#: /var/www/tasks/module/Application/view/layout/layout.phtml:56
+msgid "Dashboard"
+msgstr "Дъска"
+
+#: /var/www/tasks/module/Application/view/layout/layout.phtml:57
+msgid "My tasks"
+msgstr "Моите задачи"
+
+#: /var/www/tasks/module/Application/view/layout/layout.phtml:59
+msgid "Settings"
+msgstr "Настройки"
+
+#: /var/www/tasks/module/Application/view/layout/layout.phtml:60
+msgid "Logout"
+msgstr "Отписване"
+
+#: /var/www/tasks/module/Application/view/layout/layout.phtml:65
+msgid "Login"
+msgstr "Вход"
+
+#: /var/www/tasks/module/Application/view/layout/layout.phtml:66
+msgid "Register"
+msgstr "Регистрация"
+
 #: /var/www/tasks/module/Application/view/error/404.phtml:1
 msgid "A 404 error occurred"
-msgstr ""
+msgstr "Грешка 404"
 
 #: /var/www/tasks/module/Application/view/error/404.phtml:10
 msgid "The requested controller was unable to dispatch the request."
@@ -93,73 +121,109 @@ msgstr ""
 msgid "An error occurred"
 msgstr "Възникна грешка"
 
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:3
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:5
+msgid "Welcome"
+msgstr "Добре дошли"
+
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:9
 msgid "Tasks assigned to me"
 msgstr "Задачи прикачени към мен"
 
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:6
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:26
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:50
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:12
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:32
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:56
 msgid "From date"
 msgstr "От дата"
 
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:7
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:27
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:51
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:13
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:33
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:57
 msgid "Task name"
 msgstr "Име на задача"
 
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:8
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:28
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:52
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:14
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:34
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:58
 msgid "Current status"
 msgstr "Статус"
 
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:23
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:29
 msgid "All pending tasks"
 msgstr "Всички чакащи задачи"
 
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:29
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:35
 msgid "Assigned to"
 msgstr "Зададена на"
 
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:40
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:46
 msgid "No user..."
-msgstr ""
+msgstr "липсва"
 
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:47
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:53
 msgid "Resolved tasks"
 msgstr "Приключили задачи"
 
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:53
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:59
 msgid "Resolved by"
 msgstr "Приключена от"
 
-#: /var/www/tasks/module/Application/view/application/index/index.phtml:64
+#: /var/www/tasks/module/Application/view/application/index/index.phtml:70
 msgid "n/a"
 msgstr "няма"
 
-#: /var/www/tasks/module/Application/view/application/auth/login.phtml:7
-#: /var/www/tasks/module/Application/view/application/auth/login.phtml:34
-#: /var/www/tasks/module/Application/view/application/auth/index.phtml:3
-msgid "Login"
-msgstr "Вход"
+#: /var/www/tasks/module/Application/view/application/task/index.phtml:5
+msgid "Assigned to me"
+msgstr "Моите задачи"
 
+#: /var/www/tasks/module/Application/view/application/task/index.phtml:6
+msgid "All tasks"
+msgstr "Всички задачи"
+
+#: /var/www/tasks/module/Application/view/application/task/index.phtml:7
+msgid "Pending tasks"
+msgstr "Чакащи задачи"
+
+#: /var/www/tasks/module/Application/view/application/task/index.phtml:9
+msgid "Tasks"
+msgstr "Задачи"
+
+#: /var/www/tasks/module/Application/view/application/auth/settings.phtml:39
 #: /var/www/tasks/module/Application/view/application/auth/login.phtml:19
 #: /var/www/tasks/module/Application/view/application/auth/register.phtml:20
 msgid "Username"
 msgstr "Потребителско име"
 
-#: /var/www/tasks/module/Application/view/application/auth/login.phtml:26
-#: /var/www/tasks/module/Application/view/application/auth/register.phtml:27
+#: /var/www/tasks/module/Application/view/application/auth/settings.phtml:47
+msgid "Full Name"
+msgstr "Пълно име"
+
+#: /var/www/tasks/module/Application/view/application/auth/settings.phtml:55
+msgid "Email"
+msgstr "Електронна поща"
+
+#: /var/www/tasks/module/Application/view/application/auth/settings.phtml:63
+msgid "Phone Number"
+msgstr "Телефонен номер"
+
+#: /var/www/tasks/module/Application/view/application/auth/settings.phtml:71
+msgid "Description"
+msgstr "Регистрация"
+
+#: /var/www/tasks/module/Application/view/application/auth/settings.phtml:80
+#: /var/www/tasks/module/Application/view/application/auth/login.phtml:27
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:28
 msgid "Password"
 msgstr "Парола"
 
-#: /var/www/tasks/module/Application/view/application/auth/login.phtml:38
+#: /var/www/tasks/module/Application/view/application/auth/settings.phtml:88
+msgid "Save"
+msgstr "Запамети"
+
+#: /var/www/tasks/module/Application/view/application/auth/login.phtml:39
 msgid "Keep me signed in"
 msgstr "Запомни ме"
 
-#: /var/www/tasks/module/Application/view/application/auth/login.phtml:49
+#: /var/www/tasks/module/Application/view/application/auth/login.phtml:50
 msgid "Invalid username or password"
 msgstr "Невалидно потребителско име или парола"
 
@@ -171,41 +235,41 @@ msgstr "Само потребители"
 msgid "Sign Up"
 msgstr "Регистрация"
 
-#: /var/www/tasks/module/Application/view/application/auth/register.phtml:8
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:7
 msgid "Registration"
 msgstr "Регистрация"
 
-#: /var/www/tasks/module/Application/view/application/auth/register.phtml:34
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:36
 msgid "Confirm Password"
 msgstr "Потвърди парола"
 
-#: /var/www/tasks/module/Application/view/application/auth/register.phtml:42
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:44
 msgid "Sign up"
 msgstr "Регистрация"
 
-#: /var/www/tasks/module/Application/view/application/auth/register.phtml:53
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:55
 msgid "Home"
 msgstr "Начало"
 
-#: /var/www/tasks/module/Application/view/application/auth/register.phtml:54
-msgid "Register"
-msgstr "Регистрация"
-
-#: /var/www/tasks/module/Application/view/application/auth/register.phtml:55
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:57
 msgid "Passwords do not match"
 msgstr "Паролите не съвпадат"
 
-#: /var/www/tasks/module/Application/view/application/auth/register.phtml:56
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:58
 msgid "Registration successful"
 msgstr "Регистрацията е успешна"
 
-#: /var/www/tasks/module/Application/view/application/auth/register.phtml:57
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:59
 msgid "Username already exists"
 msgstr "Потребителското име съществува"
 
-#: /var/www/tasks/module/Application/view/application/auth/register.phtml:72
+#: /var/www/tasks/module/Application/view/application/auth/register.phtml:74
 msgid "You can login"
 msgstr "Вие можете да се логнете"
+
+#: /var/www/tasks/module/Application/view/application/auth/logout.phtml:2
+msgid "Logging out..."
+msgstr "Излизане..."
 
 #~ msgid "All rights reserved."
 #~ msgstr "Всички права запазени"

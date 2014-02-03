@@ -25,7 +25,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top mainnav" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -39,11 +39,13 @@
         </div>
         <div class="collapse navbar-collapse">
             <?php
-            echo $this->navigation('navigation')
-                ->menu()
-                ->setMinDepth(0)
-                ->setMaxDepth(0)
-                ->setUlClass('nav navbar-nav');
+            if ($this->identity()) {
+                echo $this->navigation('navigation')
+                    ->menu()
+                    ->setMinDepth(0)
+                    ->setMaxDepth(0)
+                    ->setUlClass('nav navbar-nav');
+            }
             ?>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -51,11 +53,11 @@
                         <b class="caret"></b></a>
                     <?php if ($this->identity()) : ?>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
+                            <li><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Dashboard') ?></a></li>
+                            <li><a href="<?php echo $this->url('tasks/mytasks') ?>"><?php echo $this->translate('My tasks') ?></a></li>
                             <li class="divider"></li>
-                            <li><a href="/logout"><?php echo $this->translate('Logout') ?></a></li>
+                            <li><a href="<?php echo $this->url('settings') ?>"><?php echo $this->translate('Settings') ?></a></li>
+                            <li><a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
                         </ul>
                     <?php endif ?>
                     <?php if (!$this->identity()) : ?>
@@ -70,15 +72,20 @@
     </div>
 </nav>
 
-
+<div class="navbar navbar-default navbar-fixed-top subnav">
+    <div class="container">
+        <?php
+        if ($this->identity()) {
+            echo $this->navigation('navigation')
+                ->menu()
+                ->setMinDepth(1)
+                ->setMaxDepth(1)
+                ->setOnlyActiveBranch(true);
+        }
+        ?>
+    </div>
+</div>
 <div class="container">
-    <?php
-    echo $this->navigation('navigation')
-        ->menu()
-        ->setMinDepth(1)
-        ->setMaxDepth(1)
-        ->setUlClass('nav nav-pills');
-    ?>
     <?php echo $this->content; ?>
     <hr>
     <footer>

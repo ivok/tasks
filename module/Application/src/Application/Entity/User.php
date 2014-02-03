@@ -72,10 +72,77 @@ class User
      */
     protected $tickets;
 
+    /**
+     * @ORM\Column(type="string")
+     * @Annotation\Type("Zend\Form\Element\Text")
+     * @Annotation\Attributes({"class":"form-control input-sm"})
+     */
+    protected $email;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Annotation\Type("Zend\Form\Element\Text")
+     * @Annotation\Attributes({"class":"form-control input-sm"})
+     */
+    protected $name;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Annotation\Type("Zend\Form\Element\Text")
+     * @Annotation\Attributes({"class":"form-control input-sm"})
+     */
+    protected $phone;
+
+    /**
+     * @ORM\Column(type="text")
+     * @Annotation\Type("Zend\Form\Element\Textarea")
+     * @Annotation\Attributes({"class":"form-control input-sm"})
+     */
+    protected $description;
 
     function __construct()
     {
         $this->tickets = new ArrayCollection();
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -87,11 +154,27 @@ class User
     }
 
     /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * @param mixed $password
      */
     public function setPassword($password)
     {
-        $this->password = md5($password);
+        $this->password = $password;
     }
 
     /**
@@ -100,6 +183,22 @@ class User
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * @param mixed $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhone()
+    {
+        return $this->phone;
     }
 
     /**

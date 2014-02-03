@@ -42,4 +42,10 @@ class IndexController extends AbstractActionController
             ));
         }
     }
+
+    public function usersAction()
+    {
+
+    }
+
 }

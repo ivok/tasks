@@ -35,11 +35,9 @@ class AuthController extends AbstractActionController
         $form->setValidationGroup('username', 'password');
         $request = $this->getRequest();
 
-        if ($request->isPost())
-        {
+        if ($request->isPost()) {
             $form->setData($request->getPost());
-            if($form->isValid())
-            {
+            if ($form->isValid()) {
                 $data = $request->getPost();
                 $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
                 $adapter = $authService->getAdapter();
@@ -47,13 +45,11 @@ class AuthController extends AbstractActionController
                 $adapter->setCredentialValue(md5($data->password));
                 $authResult = $authService->authenticate();
 
-                if ($authResult->isValid())
-                {
+                if ($authResult->isValid()) {
                     $identity = $authResult->getIdentity();
                     $authService->getStorage()->write($identity);
 
-                    if($data->remember == 1)
-                    {
+                    if ($data->remember == 1) {
                         $session = new SessionManager();
                         $session->rememberMe();
                     } else {
@@ -99,15 +95,12 @@ class AuthController extends AbstractActionController
         $form->setValidationGroup('username', 'password', 'confirmPassword');
         $request = $this->getRequest();
 
-        if($request->isPost())
-        {
+        if ($request->isPost()) {
             $form->setData($request->getPost());
             $data = $request->getPost();
 
-            if ($form->isValid())
-            {
-                if($em->getRepository('Application\Entity\User')->findOneBy(array('username' => $data->username)) !== null)
-                {
+            if ($form->isValid()) {
+                if ($em->getRepository('Application\Entity\User')->findOneBy(array('username' => $data->username)) !== null) {
                     return new ViewModel(array(
                         'form' => $form,
                         'message' => 'Username already exists',
@@ -115,8 +108,7 @@ class AuthController extends AbstractActionController
                     ));
                 }
 
-                if($data->password != $data->confirmPassword)
-                {
+                if ($data->password != $data->confirmPassword) {
                     return new ViewModel(array(
                         'form' => $form,
                         'message' => 'Passwords do not match',
@@ -128,7 +120,7 @@ class AuthController extends AbstractActionController
                 $em->flush();
 
                 return new ViewModel(array(
-                    'form'=>$form,
+                    'form' => $form,
                     'hideForm' => true,
                     'message' => 'Registration successful',
                 ));
@@ -136,9 +128,54 @@ class AuthController extends AbstractActionController
         }
 
         return new ViewModel(array(
-            'form'=>$form,
+            'form' => $form,
             'hideForm' => false,
         ));
+    }
+
+    public function settingsAction()
+    {
+        if ($this->identity()) {
+
+            $user = $this->identity();
+            $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+
+            $builder = new AnnotationBuilder($em);
+
+            $form = $builder->createForm('Application\Entity\User');
+            $form->setHydrator(new DoctrineHydrator($em, 'Application\Entity\User'));
+            $form->setValidationGroup('username', 'password');
+
+            $request = $this->getRequest();
+
+            if ($request->isPost()) {
+                $form->setData($request->getPost());
+                $data = $request->getPost();
+
+                if ($form->isValid()) {
+                    if (md5($data->password) == $user->getPassword()) {
+
+                        $user->setUsername($data->username);
+                        $user->setName($data->name);
+                        $user->setPhone($data->phone);
+                        $user->setEmail($data->email);
+                        $user->setDescription($data->description);
+
+                        $em->persist($user);
+                        $em->flush();
+
+                        $message = 'Successfully updated';
+                    }
+                }
+            }
+
+            return new ViewModel(array(
+                'form' => $form,
+                'message' => $message,
+            ));
+        }
+
+        return redirect('login');
     }
 
 } 

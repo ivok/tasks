@@ -1,11 +1,10 @@
-<div class="container">
-    <div class="row">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
-            <?php if($this->hideForm == false) : ?>
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+        <?php if ($this->hideForm == false) : ?>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <?php echo $this->translate('Registration')?>
+                    <?php echo $this->translate('Registration') ?>
                 </div>
                 <div class="panel-body">
                     <?php
@@ -17,21 +16,24 @@
                             <?php echo $this->form()->openTag($form); ?>
                             <fieldset>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4 lbl-sm"><?php echo $this->translate('Username')?></label>
+                                    <label
+                                        class="control-label col-sm-4 lbl-sm"><?php echo $this->translate('Username') ?></label>
 
                                     <div class="col-sm-8">
                                         <?php echo $this->formRow($form->get('username')); ?>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4 lbl-sm"><?php echo $this->translate('Password')?></label>
+                                    <label
+                                        class="control-label col-sm-4 lbl-sm"><?php echo $this->translate('Password') ?></label>
 
                                     <div class="col-sm-8">
                                         <?php echo $this->formRow($form->get('password')); ?>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4 lbl-sm"><?php echo $this->translate('Confirm Password')?></label>
+                                    <label
+                                        class="control-label col-sm-4 lbl-sm"><?php echo $this->translate('Confirm Password') ?></label>
 
                                     <div class="col-sm-8">
                                         <?php echo $this->formRow($form->get('confirmPassword')); ?>
@@ -50,11 +52,11 @@
                                                 <button type="button" class="close" data-dismiss="alert">×</button>
                                                 <span class="glyphicon glyphicon-thumbs-down"></span>
                                                 <?php if ($this->message) echo $this->translate($this->message); ?>
-                                                <?php $this->translate('Home')?>
-                                                <?php $this->translate('Register')?>
-                                                <?php $this->translate('Passwords do not match')?>
-                                                <?php $this->translate('Registration successful')?>
-                                                <?php $this->translate('Username already exists')?>
+                                                <?php $this->translate('Home') ?>
+                                                <?php $this->translate('Register') ?>
+                                                <?php $this->translate('Passwords do not match') ?>
+                                                <?php $this->translate('Registration successful') ?>
+                                                <?php $this->translate('Username already exists') ?>
                                             </div>
                                         </div>
                                     </div>
@@ -65,14 +67,13 @@
                     </div>
                 </div>
             </div>
-            <?php else : ?>
-                <div class="alert alert-dismissable alert-success">
-                    <span class="glyphicon glyphicon-thumbs-up"></span>
-                    <?php echo $this->translate($this->message) ?>
-                    <a href="<?php $this->url('login')?>"><?php echo $this->translate('You can login') ?></a>
-                </div>
-            <?php endif ?>
-        </div>
-
+        <?php else : ?>
+            <div class="alert alert-dismissable alert-success">
+                <span class="glyphicon glyphicon-thumbs-up"></span>
+                <?php echo $this->translate($this->message) ?>
+                <a href="<?php $this->url('login') ?>"><?php echo $this->translate('You can login') ?></a>
+            </div>
+        <?php endif ?>
     </div>
 </div>
+
