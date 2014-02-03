@@ -56,6 +56,9 @@ class AuthController extends AbstractActionController
                     {
                         $session = new SessionManager();
                         $session->rememberMe();
+                    } else {
+                        $session = new SessionManager();
+                        $session->forgetMe();
                     }
                     return $this->redirect()->toRoute('home');
                 }
@@ -71,6 +74,18 @@ class AuthController extends AbstractActionController
         return new ViewModel(array(
             'form' => $form,
         ));
+    }
+
+    public function logoutAction()
+    {
+        if ($this->identity()) {
+            $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+            $authService->clearIdentity();
+        }
+        $session = new SessionManager();
+        $session->forgetMe();
+        $session->destroy();
+        return $this->redirect()->toRoute('login');
     }
 
     public function registerAction()
@@ -126,8 +141,4 @@ class AuthController extends AbstractActionController
         ));
     }
 
-    public function logoutAction()
-    {
-
-    }
 } 

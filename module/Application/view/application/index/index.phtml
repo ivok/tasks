@@ -1,4 +1,10 @@
+<?php $user = $this->identity() ?>
 <h1>Home</h1>
+<div class="alert alert-dismissable alert-success">
+    <span class="glyphicon glyphicon-thumbs-up"></span>
+    <?php echo $this->translate('Welcome') ?> <?php echo $user->getUsername() ?>
+</div>
+<?php echo $user->getUsername() ?>
 <div class="panel panel-default">
     <div class="panel-heading"><?php echo $this->translate('Tasks assigned to me') ?></div>
     <div class="panel-body">

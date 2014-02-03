@@ -30,6 +30,16 @@ return array(
                     ),
                 ),
             ),
+            'logout' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/logout',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Auth',
+                        'action' => 'logout',
+                    ),
+                ),
+            ),
             'register' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -148,12 +158,31 @@ return array(
     'navigation' => array(
         'default' => array(
             array(
-                'label' => 'Login',
-                'route' => 'login',
+                'label' => 'Tasks',
+                'route' => 'home',
+                'pages' => array(
+                    array(
+                        'label' => 'Create task',
+                        'route' => 'home'
+                    ),
+                    array(
+                        'label' => 'My tasks',
+                        'route' => 'login'
+                    ),
+                    array(
+                        'label' => 'Pending tasks',
+                        'route' => 'home'
+                    ),
+                    array(
+                        'label' => 'Completed tasks',
+                        'route' => 'home'
+                    ),
+                ),
+
             ),
             array(
-                'label' => 'Register',
-                'route' => 'register',
+                'label' => 'Users',
+                'route' => 'home',
             ),
         ),
     ),
