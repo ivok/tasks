@@ -49,7 +49,7 @@ return array(
                             'route' => '/mytasks',
                             'defaults' => array(
                                 'controller' => 'Application\Controller\Task',
-                                'action' => 'mytasks'
+                                'action' => 'mytasks',
                             )
                         ),
                     ),

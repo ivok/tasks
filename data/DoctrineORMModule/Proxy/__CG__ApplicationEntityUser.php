@@ -64,10 +64,10 @@ class User extends \Application\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'username', 'password', 'confirmPassword', 'remember', 'submit', 'tickets');
+            return array('__isInitialized__', 'tickets', 'name', 'phone', 'description', 'id', 'username', 'password', 'email');
         }
 
-        return array('__isInitialized__', 'id', 'username', 'password', 'confirmPassword', 'remember', 'submit', 'tickets');
+        return array('__isInitialized__', 'tickets', 'name', 'phone', 'description', 'id', 'username', 'password', 'email');
     }
 
     /**
@@ -176,6 +176,61 @@ class User extends \Application\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function setDescription($description)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDescription', array($description));
+
+        return parent::setDescription($description);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDescription()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDescription', array());
+
+        return parent::getDescription();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setEmail($email)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEmail', array($email));
+
+        return parent::setEmail($email);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getEmail()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEmail', array());
+
+        return parent::getEmail();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setId($id)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setId', array($id));
+
+        return parent::setId($id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getId()
     {
         if ($this->__isInitialized__ === false) {
@@ -186,6 +241,28 @@ class User extends \Application\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', array());
 
         return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setName($name)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setName', array($name));
+
+        return parent::setName($name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getName', array());
+
+        return parent::getName();
     }
 
     /**
@@ -213,6 +290,50 @@ class User extends \Application\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function setPhone($phone)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPhone', array($phone));
+
+        return parent::setPhone($phone);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPhone()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPhone', array());
+
+        return parent::getPhone();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setTickets($tickets)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTickets', array($tickets));
+
+        return parent::setTickets($tickets);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTickets()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTickets', array());
+
+        return parent::getTickets();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setUsername($username)
     {
 
@@ -230,17 +351,6 @@ class User extends \Application\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsername', array());
 
         return parent::getUsername();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getTickets()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTickets', array());
-
-        return parent::getTickets();
     }
 
 }

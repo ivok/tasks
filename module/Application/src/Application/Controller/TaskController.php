@@ -12,7 +12,7 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Zend\Paginator\Paginator;
 
@@ -21,7 +21,18 @@ class TaskController extends AbstractActionController
 {
     public function indexAction()
     {
-        echo "index";
+        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $repository = $entityManager->getRepository('Application\Entity\Ticket');
+        $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('ticket')));
+        $paginator = new Paginator($adapter);
+        $paginator->setDefaultItemCountPerPage(10);
+        $page = (int)$this->params()->fromQuery('page');
+
+        if($page) $paginator->setCurrentPageNumber($page);
+
+        return new ViewModel(array(
+            'paginator' => $paginator,
+        ));
     }
 
     public function pendingAction()
@@ -36,6 +47,11 @@ class TaskController extends AbstractActionController
 
     public function mytasksAction()
     {
-        echo "my";
+        if($this->identity())
+        {
+            return new ViewModel();
+        }
+
+        return $this->redirect()->toRoute('login');
     }
 }
