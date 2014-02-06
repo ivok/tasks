@@ -24,7 +24,7 @@ class IndexController extends AbstractActionController
         $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
 
         if (!$auth->hasIdentity()) {
-            return $this->redirect()->toRoute('login');
+            return $this->redirect()->toRoute('auth/login');
         } else {
             $identity = $auth->getIdentity();
             $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');

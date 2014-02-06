@@ -20,7 +20,7 @@ use Zend\Crypt\Utils as CryptUtils;
  *
  * Implements a pretty good chunk of RFC 2617.
  *
- * @todo       Support auth-int
+ * @todo       Support index-int
  * @todo       Track nonces, nonce-count, opaque for replay protection and stale support
  * @todo       Support Authentication-Info header
  */
@@ -69,7 +69,7 @@ class Http implements AdapterInterface
     protected $acceptSchemes;
 
     /**
-     * Space-delimited list of protected domains for Digest Auth
+     * Space-delimited list of protected domains for Digest index
      *
      * @var string
      */
@@ -112,12 +112,12 @@ class Http implements AdapterInterface
     protected $algo;
 
     /**
-     * List of supported qop options. My intention is to support both 'auth' and
-     * 'auth-int', but 'auth-int' won't make it into the first version.
+     * List of supported qop options. My intention is to support both 'index' and
+     * 'index-int', but 'index-int' won't make it into the first version.
      *
      * @var array
      */
-    protected $supportedQops = array('auth');
+    protected $supportedQops = array('index');
 
     /**
      * Whether or not to do Proxy Authentication instead of origin server
@@ -149,7 +149,7 @@ class Http implements AdapterInterface
      */
     public function __construct(array $config)
     {
-        $this->request  = null;
+        $this->request = null;
         $this->response = null;
         $this->ieNoOpaque = false;
 
@@ -171,7 +171,8 @@ class Http implements AdapterInterface
         if (empty($config['realm']) ||
             !ctype_print($config['realm']) ||
             strpos($config['realm'], ':') !== false ||
-            strpos($config['realm'], '"') !== false) {
+            strpos($config['realm'], '"') !== false
+        ) {
             throw new Exception\InvalidArgumentException(
                 'Config key \'realm\' is required, and must contain only printable characters,'
                 . 'excluding quotation marks and colons'
@@ -183,7 +184,8 @@ class Http implements AdapterInterface
         if (in_array('digest', $this->acceptSchemes)) {
             if (empty($config['digest_domains']) ||
                 !ctype_print($config['digest_domains']) ||
-                strpos($config['digest_domains'], '"') !== false) {
+                strpos($config['digest_domains'], '"') !== false
+            ) {
                 throw new Exception\InvalidArgumentException(
                     'Config key \'digest_domains\' is required, and must contain '
                     . 'only printable characters, excluding quotation marks'
@@ -193,16 +195,17 @@ class Http implements AdapterInterface
             }
 
             if (empty($config['nonce_timeout']) ||
-                !is_numeric($config['nonce_timeout'])) {
+                !is_numeric($config['nonce_timeout'])
+            ) {
                 throw new Exception\InvalidArgumentException(
                     'Config key \'nonce_timeout\' is required, and must be an integer'
                 );
             } else {
-                $this->nonceTimeout = (int) $config['nonce_timeout'];
+                $this->nonceTimeout = (int)$config['nonce_timeout'];
             }
 
             // We use the opaque value unless explicitly told not to
-            if (isset($config['use_opaque']) && false == (bool) $config['use_opaque']) {
+            if (isset($config['use_opaque']) && false == (bool)$config['use_opaque']) {
                 $this->useOpaque = false;
             } else {
                 $this->useOpaque = true;
@@ -216,8 +219,8 @@ class Http implements AdapterInterface
         }
 
         // Don't be a proxy unless explicitly told to do so
-        if (isset($config['proxy_auth']) && true == (bool) $config['proxy_auth']) {
-            $this->imaProxy = true;  // I'm a Proxy
+        if (isset($config['proxy_auth']) && true == (bool)$config['proxy_auth']) {
+            $this->imaProxy = true; // I'm a Proxy
         } else {
             $this->imaProxy = false;
         }
@@ -325,7 +328,7 @@ class Http implements AdapterInterface
     {
         if (empty($this->request) || empty($this->response)) {
             throw new Exception\RuntimeException('Request and Response objects must be set before calling '
-                                                . 'authenticate()');
+                . 'authenticate()');
         }
 
         if ($this->imaProxy) {
@@ -347,7 +350,7 @@ class Http implements AdapterInterface
         $clientScheme = strtolower($clientScheme);
 
         // The server can issue multiple challenges, but the client should
-        // answer with only the selected auth scheme.
+        // answer with only the selected index scheme.
         if (!in_array($clientScheme, $this->supportedSchemes)) {
             $this->response->setStatusCode(400);
             return new Authentication\Result(
@@ -383,7 +386,7 @@ class Http implements AdapterInterface
      * Sets a 401 or 407 Unauthorized response code, and creates the
      * appropriate Authenticate header(s) to prompt for credentials.
      *
-     * @return Authentication\Result Always returns a non-identity Auth result
+     * @return Authentication\Result Always returns a non-identity index result
      */
     protected function _challengeClient()
     {
@@ -436,11 +439,11 @@ class Http implements AdapterInterface
     protected function _digestHeader()
     {
         $wwwauth = 'Digest realm="' . $this->realm . '", '
-                 . 'domain="' . $this->domains . '", '
-                 . 'nonce="' . $this->_calcNonce() . '", '
-                 . ($this->useOpaque ? 'opaque="' . $this->_calcOpaque() . '", ' : '')
-                 . 'algorithm="' . $this->algo . '", '
-                 . 'qop="' . implode(',', $this->supportedQops) . '"';
+            . 'domain="' . $this->domains . '", '
+            . 'nonce="' . $this->_calcNonce() . '", '
+            . ($this->useOpaque ? 'opaque="' . $this->_calcOpaque() . '", ' : '')
+            . 'algorithm="' . $this->algo . '", '
+            . 'qop="' . implode(',', $this->supportedQops) . '"';
 
         return $wwwauth;
     }
@@ -506,7 +509,7 @@ class Http implements AdapterInterface
      *
      * @param  string $header Client's Authorization header
      * @throws Exception\ExceptionInterface
-     * @return Authentication\Result Valid auth result only on successful auth
+     * @return Authentication\Result Valid index result only on successful index
      */
     protected function _digestAuth($header)
     {
@@ -562,10 +565,10 @@ class Http implements AdapterInterface
         // Calculate h(a2). The value of this hash depends on the qop
         // option selected by the client and the supported hash functions
         switch ($data['qop']) {
-            case 'auth':
+            case 'index':
                 $a2 = $this->request->getMethod() . ':' . $data['uri'];
                 break;
-            case 'auth-int':
+            case 'index-int':
                 // Should be REQUEST_METHOD . ':' . uri . ':' . hash(entity-body),
                 // but this isn't supported yet, so fall through to default case
             default:
@@ -579,7 +582,7 @@ class Http implements AdapterInterface
         // Calculate the server's version of the request-digest. This must
         // match $data['response']. See RFC 2617, section 3.2.2.1
         $message = $data['nonce'] . ':' . $data['nc'] . ':' . $data['cnonce'] . ':' . $data['qop'] . ':' . $ha2;
-        $digest  = hash('md5', $ha1 . ':' . $message);
+        $digest = hash('md5', $ha1 . ':' . $message);
 
         // If our digest matches the client's let them in, otherwise return
         // a 401 code and exit to prevent access to the protected resource.
@@ -654,8 +657,9 @@ class Http implements AdapterInterface
         // 400 code.
         $ret = preg_match('/username="([^"]+)"/', $header, $temp);
         if (!$ret || empty($temp[1])
-                  || !ctype_print($temp[1])
-                  || strpos($temp[1], ':') !== false) {
+            || !ctype_print($temp[1])
+            || strpos($temp[1], ':') !== false
+        ) {
             $data['username'] = '::invalid::';
         } else {
             $data['username'] = $temp[1];
@@ -722,10 +726,11 @@ class Http implements AdapterInterface
         // if it can easily be overridden by the client?
         $ret = preg_match('/algorithm="?(' . $this->algo . ')"?/', $header, $temp);
         if ($ret && !empty($temp[1])
-                 && in_array($temp[1], $this->supportedAlgos)) {
+            && in_array($temp[1], $this->supportedAlgos)
+        ) {
             $data['algorithm'] = $temp[1];
         } else {
-            $data['algorithm'] = 'MD5';  // = $this->algo; ?
+            $data['algorithm'] = 'MD5'; // = $this->algo; ?
         }
         $temp = null;
 
@@ -762,7 +767,8 @@ class Http implements AdapterInterface
 
             // This implementation only sends MD5 hex strings in the opaque value
             if (!$this->ieNoOpaque &&
-                (32 != strlen($temp[1]) || !ctype_xdigit($temp[1]))) {
+                (32 != strlen($temp[1]) || !ctype_xdigit($temp[1]))
+            ) {
                 return false;
             }
 

@@ -12,72 +12,21 @@ use Doctrine\ORM\Mapping as ORM;
 use Zend\Form\Annotation;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Auth\Entity\Account;
+
 /**
- * class User
+ * Class User
  * @ORM\Entity
  * @ORM\Table(name="users")
  * @Annotation\Name("user")
  * @Annotation\Attributes({"class":"form-horizontal"})
  */
-class User
+class User extends Account
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     * @Annotation\Exclude
-     */
-    protected $id;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Annotation\Type("Zend\Form\Element\Text")
-     * @Annotation\Required({"required":"true" })
-     * @Annotation\Filter({"name":"StripTags"})
-     * @Annotation\Validator({"name":"StringLength", "options":{"min":"2"}})
-     * @Annotation\Options({"class":"Username:"})
-     * @Annotation\Attributes({"class":"form-control input-sm"})
-     */
-    protected $username;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Annotation\Type("Zend\Form\Element\Password")
-     * @Annotation\Required({"required":"true" })
-     * @Annotation\Validator({"name":"StringLength", "options":{"min":"6"}})
-     * @Annotation\Attributes({"class":"form-control input-sm"})
-     */
-    protected $password;
-
-    /**
-     * @Annotation\Type("Zend\Form\Element\Password")
-     * @Annotation\Required({"required":"true" })
-     * @Annotation\Attributes({"class":"form-control input-sm"})
-     */
-    protected $confirmPassword;
-
-    /**
-     * @Annotation\Type("Zend\Form\Element\Checkbox")
-     */
-    protected $remember;
-
-    /**
-     * @Annotation\Type("Zend\Form\Element\Submit")
-     * @Annotation\Attributes({"value":"Submit", "class":"btn btn-primary btn-sm"})
-     */
-    protected $submit;
-
     /**
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="user")
      */
     protected $tickets;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Annotation\Type("Zend\Form\Element\Text")
-     * @Annotation\Attributes({"class":"form-control input-sm"})
-     */
-    protected $email;
 
     /**
      * @ORM\Column(type="string")
@@ -100,7 +49,7 @@ class User
      */
     protected $description;
 
-    function __construct()
+    public function __construct()
     {
         $this->tickets = new ArrayCollection();
     }
@@ -202,6 +151,22 @@ class User
     }
 
     /**
+     * @param mixed $tickets
+     */
+    public function setTickets($tickets)
+    {
+        $this->tickets = $tickets;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+
+    /**
      * @param mixed $username
      */
     public function setUsername($username)
@@ -215,14 +180,6 @@ class User
     public function getUsername()
     {
         return $this->username;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTickets()
-    {
-        return $this->tickets;
     }
 
 

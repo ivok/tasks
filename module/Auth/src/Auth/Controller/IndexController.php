@@ -1,25 +1,27 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: vis
- * Date: 1/22/14
- * Time: 5:01 PM
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Application\Controller;
+namespace Auth\Controller;
 
-
-use DoctrineORMModule\Form\Annotation\AnnotationBuilder;
-use Symfony\Component\Console\Application;
 use Zend\Mvc\Controller\AbstractActionController;
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use Zend\View\Model\ViewModel;
-use Application\Entity\User;
 use Zend\Session\SessionManager;
 
-class AuthController extends AbstractActionController
-{
+use DoctrineORMModule\Form\Annotation\AnnotationBuilder;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
+use Symfony\Component\Console\Application;
 
+use Auth\Entity\AccountEntity;
+
+
+class IndexController extends AbstractActionController
+{
     public function indexAction()
     {
         return new ViewModel();
@@ -28,10 +30,10 @@ class AuthController extends AbstractActionController
     public function loginAction()
     {
         $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $user = new User();
+        $user = new AccountEntity();
         $builder = new AnnotationBuilder($em);
-        $form = $builder->createForm('Application\Entity\User');
-        $form->setHydrator(new DoctrineHydrator($em, 'Application\Entity\User'))->bind($user);
+        $form = $builder->createForm('Auth\Entity\AccountEntity');
+        $form->setHydrator(new DoctrineHydrator($em, 'Auth\Entity\AccountEntity'))->bind($user);
         $form->setValidationGroup('username', 'password');
         $request = $this->getRequest();
 
@@ -81,7 +83,7 @@ class AuthController extends AbstractActionController
         $session = new SessionManager();
         $session->forgetMe();
         $session->destroy();
-        return $this->redirect()->toRoute('login');
+        return $this->redirect()->toRoute('auth/login');
     }
 
     public function registerAction()
@@ -90,8 +92,8 @@ class AuthController extends AbstractActionController
         $user = new User();
         $builder = new AnnotationBuilder($em);
 
-        $form = $builder->createForm('Application\Entity\User');
-        $form->setHydrator(new DoctrineHydrator($em, 'Application\Entity\User'))->bind($user);
+        $form = $builder->createForm('Auth\Entity\User');
+//        $form->setHydrator(new DoctrineHydrator($em, 'Application\Entity\User'))->bind($user);
         $form->setValidationGroup('username', 'password', 'confirmPassword');
         $request = $this->getRequest();
 
@@ -100,7 +102,7 @@ class AuthController extends AbstractActionController
             $data = $request->getPost();
 
             if ($form->isValid()) {
-                if ($em->getRepository('Application\Entity\User')->findOneBy(array('username' => $data->username)) !== null) {
+                if ($em->getRepository('Auth\Entity\User')->findOneBy(array('username' => $data->username)) !== null) {
                     return new ViewModel(array(
                         'form' => $form,
                         'message' => 'Username already exists',
@@ -132,4 +134,49 @@ class AuthController extends AbstractActionController
             'hideForm' => false,
         ));
     }
-} 
+
+    public function settingsAction()
+    {
+        if ($this->identity()) {
+
+            $user = $this->identity();
+            $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+
+            $builder = new AnnotationBuilder($em);
+
+            $form = $builder->createForm('Auth\Entity\User');
+            $form->setHydrator(new DoctrineHydrator($em, 'Auth\Entity\User'));
+            $form->setValidationGroup('username', 'password');
+
+            $request = $this->getRequest();
+
+            if ($request->isPost()) {
+                $form->setData($request->getPost());
+                $data = $request->getPost();
+
+                if ($form->isValid()) {
+                    if (md5($data->password) == $user->getPassword()) {
+
+                        $user->setUsername($data->username);
+                        $user->setName($data->name);
+                        $user->setPhone($data->phone);
+                        $user->setEmail($data->email);
+                        $user->setDescription($data->description);
+
+                        $em->persist($user);
+                        $em->flush();
+
+                        $message = 'Successfully updated';
+                    }
+                }
+            }
+
+            return new ViewModel(array(
+                'form' => $form,
+                'message' => $message,
+            ));
+        }
+
+        return redirect('login');
+    }
+}

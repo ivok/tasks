@@ -76,47 +76,47 @@ return array(
                 ),
             ),
 
-            //Auth controller
-            'login' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route' => '/login',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Auth',
-                        'action' => 'login',
-                    ),
-                ),
-            ),
-            'logout' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route' => '/logout',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Auth',
-                        'action' => 'logout',
-                    ),
-                ),
-            ),
-            'register' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route' => '/register',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Auth',
-                        'action' => 'register',
-                    ),
-                ),
-            ),
-            'settings' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route' => '/settings',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Auth',
-                        'action' => 'settings',
-                    ),
-                ),
-            ),
+            //index controller
+//            'login' => array(
+//                'type' => 'Zend\Mvc\Router\Http\Literal',
+//                'options' => array(
+//                    'route' => '/login',
+//                    'defaults' => array(
+//                        'controller' => 'Application\Controller\Auth',
+//                        'action' => 'login',
+//                    ),
+//                ),
+//            ),
+//            'logout' => array(
+//                'type' => 'Zend\Mvc\Router\Http\Literal',
+//                'options' => array(
+//                    'route' => '/logout',
+//                    'defaults' => array(
+//                        'controller' => 'Application\Controller\Auth',
+//                        'action' => 'logout',
+//                    ),
+//                ),
+//            ),
+//            'register' => array(
+//                'type' => 'Zend\Mvc\Router\Http\Literal',
+//                'options' => array(
+//                    'route' => '/register',
+//                    'defaults' => array(
+//                        'controller' => 'Application\Controller\Auth',
+//                        'action' => 'register',
+//                    ),
+//                ),
+//            ),
+//            'settings' => array(
+//                'type' => 'Zend\Mvc\Router\Http\Literal',
+//                'options' => array(
+//                    'route' => '/settings',
+//                    'defaults' => array(
+//                        'controller' => 'Application\Controller\Auth',
+//                        'action' => 'settings',
+//                    ),
+//                ),
+//            ),
             // Project Controller
             'projects' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
@@ -222,17 +222,9 @@ return array(
 
             'orm_default' => array(
                 'drivers' => array(
-                    'Application\Entity' => 'application_entities'
+                    'Application\Entity' => 'application_entities',
                 )
             )
-        ),
-        'authentication' => array(
-            'orm_default' => array(
-                'object_manager' => 'Doctrine\ORM\EntityManager',
-                'identity_class' => 'Application\Entity\User',
-                'identity_property' => 'username',
-                'credential_property' => 'password',
-            ),
         ),
     ),
     'navigation' => array(
@@ -279,6 +271,7 @@ return array(
                     ),
                 ),
             ),
+
         ),
     ),
 );

@@ -2,10 +2,11 @@
 return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
-//        'ZendDeveloperTools',
+        'ZendDeveloperTools',
         'DoctrineModule',
         'DoctrineORMModule',
         'Application',
+        'Auth',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
@@ -61,7 +62,7 @@ return array(
     //     ),
     // )
 
-   // Initial configuration with which to seed the ServiceManager.
-   // Should be compatible with Zend\ServiceManager\Config.
-   // 'service_manager' => array(),
+    // Initial configuration with which to seed the ServiceManager.
+    // Should be compatible with Zend\ServiceManager\Config.
+    // 'service_manager' => array(),
 );

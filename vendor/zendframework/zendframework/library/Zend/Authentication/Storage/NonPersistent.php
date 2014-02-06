@@ -19,7 +19,7 @@ namespace Zend\Authentication\Storage;
 class NonPersistent implements StorageInterface
 {
     /**
-     * Holds the actual auth data
+     * Holds the actual index data
      */
     protected $data;
 

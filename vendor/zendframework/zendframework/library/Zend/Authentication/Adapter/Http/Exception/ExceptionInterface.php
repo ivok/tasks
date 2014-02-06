@@ -12,7 +12,8 @@ namespace Zend\Authentication\Adapter\Http\Exception;
 use Zend\Authentication\Adapter\Exception\ExceptionInterface as Exception;
 
 /**
- * HTTP Auth Resolver Exception
+ * HTTP index Resolver Exception
  */
 interface ExceptionInterface extends Exception
-{}
+{
+}

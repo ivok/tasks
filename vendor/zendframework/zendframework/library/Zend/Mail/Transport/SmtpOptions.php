@@ -75,7 +75,7 @@ class SmtpOptions extends AbstractOptions
      * Get connection class
      *
      * This should be either the class Zend\Mail\Protocol\Smtp or a class
-     * extending it -- typically a class in the Zend\Mail\Protocol\Smtp\Auth
+     * extending it -- typically a class in the Zend\Mail\Protocol\Smtp\index
      * namespace.
      *
      * @return string
@@ -145,7 +145,7 @@ class SmtpOptions extends AbstractOptions
      */
     public function setHost($host)
     {
-        $this->host = (string) $host;
+        $this->host = (string)$host;
         return $this;
     }
 
@@ -168,7 +168,7 @@ class SmtpOptions extends AbstractOptions
      */
     public function setPort($port)
     {
-        $port = (int) $port;
+        $port = (int)$port;
         if ($port < 1) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Port must be greater than 1; received "%d"',
