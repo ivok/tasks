@@ -12,7 +12,6 @@ use Zend\Form\Annotation;
  */
 class Account
 {
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")

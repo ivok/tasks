@@ -15,7 +15,6 @@ use Zend\Session\SessionManager;
 
 use DoctrineORMModule\Form\Annotation\AnnotationBuilder;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
-use Symfony\Component\Console\Application;
 
 use Auth\Entity\AccountEntity;
 
