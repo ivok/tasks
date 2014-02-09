@@ -10,6 +10,20 @@
 return array(
     'router' => array(
         'routes' => array(
+            'tickets' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/tickets[/][:action][/:page]',
+                     'constraints' => array(
+                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'page'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Application\Controller\Task',
+                         'action'     => 'index',
+                     ),
+                 ),
+            ),
             //Index Controller
             'home' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
