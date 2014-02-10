@@ -23,6 +23,22 @@ return array(
                          'action'     => 'index',
                      ),
                  ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'mytasks' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '[/:page]',
+                            'constraints' => array(
+                                'page' => '[0-9]+',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Application\Controller\Task',
+                                'action' => 'index',
+                            ),
+                        ),
+                    ),
+                ),
             ),
             //Index Controller
             'home' => array(
@@ -244,24 +260,12 @@ return array(
     'navigation' => array(
         'default' => array(
             array(
-                'label' => 'Tasks',
-                'route' => 'tasks/mytasks',
+                'label' => 'Tickets',
+                'route' => 'tickets',
                 'pages' => array(
                     array(
-                        'label' => 'Assigned to me',
-                        'route' => 'tasks/mytasks'
-                    ),
-                    array(
-                        'label' => 'All tasks',
-                        'route' => 'tasks'
-                    ),
-                    array(
-                        'label' => 'Pending tasks',
-                        'route' => 'tasks/pending'
-                    ),
-                    array(
-                        'label' => 'Resolved tasks',
-                        'route' => 'tasks/resolved'
+                        'label' => 'My tickets',
+                        'route' => 'mytasks'
                     ),
                 ),
             ),

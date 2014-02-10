@@ -37,21 +37,16 @@ class TaskController extends AbstractActionController
 
     public function pendingAction()
     {
-        echo "pending";
+
     }
 
     public function resolvedAction()
     {
-        echo "resolved";
+
     }
 
     public function mytasksAction()
     {
-        if($this->identity())
-        {
-            return new ViewModel();
-        }
 
-        return $this->redirect()->toRoute('login');
     }
 }
