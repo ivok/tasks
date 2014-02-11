@@ -16,12 +16,13 @@ class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
-        $eventManager        = $e->getApplication()->getEventManager();
+        $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
 
         $translator = $e->getApplication()->getServiceManager()->get('translator');
         $translator->setLocale('bg_BG')->setFallbackLocale('en_US');
+
 
     }
 
@@ -45,7 +46,7 @@ class Module
     {
         return array(
             'factories' => array(
-                'Zend\Authentication\AuthenticationService' => function($serviceManager) {
+                'Zend\Authentication\AuthenticationService' => function ($serviceManager) {
                         // If you are using DoctrineORMModule:
                         return $serviceManager->get('doctrine.authenticationservice.orm_default');
                     }

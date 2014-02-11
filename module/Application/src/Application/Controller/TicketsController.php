@@ -17,16 +17,26 @@ use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Zend\Paginator\Paginator;
 
 
-class TaskController extends AbstractActionController
+class TicketsController extends AbstractActionController
 {
     public function indexAction()
     {
         $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        $repository = $entityManager->getRepository('Application\Entity\Ticket');
-        $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('ticket')));
+
+//        $repository = $entityManager->getRepository('Application\Entity\Ticket');
+//        $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('ticket')));
+//        $paginator = new Paginator($adapter);
+//        $paginator->setDefaultItemCountPerPage(1);
+
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('item')
+            ->from('Application\Entity\Ticket', 'item')
+            ->orderBy('item.date', 'ASC');
+        $adapter = new DoctrineAdapter(new ORMPaginator($queryBuilder));
         $paginator = new Paginator($adapter);
-        $paginator->setDefaultItemCountPerPage(10);
-        $page = (int)$this->params()->fromQuery('page');
+        $paginator->setDefaultItemCountPerPage(1);
+
+        $page = (int)$this->params()->fromRoute('page');
 
         if($page) $paginator->setCurrentPageNumber($page);
 

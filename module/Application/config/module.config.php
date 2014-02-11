@@ -11,34 +11,20 @@ return array(
     'router' => array(
         'routes' => array(
             'tickets' => array(
-                 'type'    => 'segment',
-                 'options' => array(
-                     'route'    => '/tickets[/][:action][/:page]',
-                     'constraints' => array(
-                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                         'page'     => '[0-9]+',
-                     ),
-                     'defaults' => array(
-                         'controller' => 'Application\Controller\Task',
-                         'action'     => 'index',
-                     ),
-                 ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'mytasks' => array(
-                        'type' => 'segment',
-                        'options' => array(
-                            'route' => '[/:page]',
-                            'constraints' => array(
-                                'page' => '[0-9]+',
-                            ),
-                            'defaults' => array(
-                                'controller' => 'Application\Controller\Task',
-                                'action' => 'index',
-                            ),
-                        ),
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/tickets[/][:action][/:page]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'page' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Tickets',
+                        'action' => 'index',
+                        'page' => 1,
                     ),
                 ),
+                'may_terminate' => true,
             ),
             //Index Controller
             'home' => array(
@@ -47,113 +33,6 @@ return array(
                     'route' => '/',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
-                        'action' => 'index',
-                    ),
-                ),
-            ),
-            'users' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route' => '/users',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action' => 'users',
-                    ),
-                ),
-            ),
-            //Task Controller
-            'tasks' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route' => '/tasks',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Task',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'mytasks' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route' => '/mytasks',
-                            'defaults' => array(
-                                'controller' => 'Application\Controller\Task',
-                                'action' => 'mytasks',
-                            )
-                        ),
-                    ),
-                    'pending' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route' => '/pending',
-                            'defaults' => array(
-                                'controller' => 'Application\Controller\Task',
-                                'action' => 'pending'
-                            )
-                        ),
-                    ),
-                    'resolved' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route' => '/resolved',
-                            'defaults' => array(
-                                'controller' => 'Application\Controller\Task',
-                                'action' => 'resolved'
-                            )
-                        ),
-                    ),
-                ),
-            ),
-
-            //index controller
-//            'login' => array(
-//                'type' => 'Zend\Mvc\Router\Http\Literal',
-//                'options' => array(
-//                    'route' => '/login',
-//                    'defaults' => array(
-//                        'controller' => 'Application\Controller\Auth',
-//                        'action' => 'login',
-//                    ),
-//                ),
-//            ),
-//            'logout' => array(
-//                'type' => 'Zend\Mvc\Router\Http\Literal',
-//                'options' => array(
-//                    'route' => '/logout',
-//                    'defaults' => array(
-//                        'controller' => 'Application\Controller\Auth',
-//                        'action' => 'logout',
-//                    ),
-//                ),
-//            ),
-//            'register' => array(
-//                'type' => 'Zend\Mvc\Router\Http\Literal',
-//                'options' => array(
-//                    'route' => '/register',
-//                    'defaults' => array(
-//                        'controller' => 'Application\Controller\Auth',
-//                        'action' => 'register',
-//                    ),
-//                ),
-//            ),
-//            'settings' => array(
-//                'type' => 'Zend\Mvc\Router\Http\Literal',
-//                'options' => array(
-//                    'route' => '/settings',
-//                    'defaults' => array(
-//                        'controller' => 'Application\Controller\Auth',
-//                        'action' => 'settings',
-//                    ),
-//                ),
-//            ),
-            // Project Controller
-            'projects' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route' => '/projects',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Project',
                         'action' => 'index',
                     ),
                 ),
@@ -214,9 +93,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Task' => 'Application\Controller\TaskController',
-            'Application\Controller\Auth' => 'Application\Controller\AuthController',
-            'Application\Controller\Project' => 'Application\Controller\ProjectController',
+            'Application\Controller\Tickets' => 'Application\Controller\TicketsController',
         ),
     ),
     'view_manager' => array(
@@ -263,33 +140,12 @@ return array(
                 'label' => 'Tickets',
                 'route' => 'tickets',
                 'pages' => array(
-                    array(
-                        'label' => 'My tickets',
-                        'route' => 'mytasks'
-                    ),
+//                    array(
+//                        'label' => 'All',
+//                        'route' => 'tickets'
+//                    ),
                 ),
             ),
-            array(
-                'label' => 'Projects',
-                'route' => 'projects',
-                'pages' => array(
-                    array(
-                        'label' => 'All projects',
-                        'route' => 'projects'
-                    ),
-                ),
-            ),
-            array(
-                'label' => 'Users',
-                'route' => 'users',
-                'pages' => array(
-                    array(
-                        'label' => 'All users',
-                        'route' => 'users'
-                    ),
-                ),
-            ),
-
         ),
     ),
 );

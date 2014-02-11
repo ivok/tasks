@@ -1,4 +1,4 @@
-a{
+a {
     -webkit-transition: all 600ms ease;
     -moz-transition: all 600ms ease;
     -ms-transition: all 600ms ease;
@@ -9,6 +9,10 @@ a{
 body {
     padding-top: 95px;
     padding-bottom: 40px;
+}
+
+.spacer {
+    margin-top: 20px;
 }
 
 .zf-green {
@@ -56,8 +60,8 @@ div.container a.brand {
 }
 
 .lbl-sm {
-    padding-top: 4px!important;
-    font-weight: normal!important;
+    padding-top: 4px !important;
+    font-weight: normal !important;
 }
 
 .navbar {
@@ -94,6 +98,6 @@ div.container a.brand {
 }
 
 .subnav a {
-    padding: 8px!important;
+    padding: 8px !important;
     line-height: 36px;
 }

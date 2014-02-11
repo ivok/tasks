@@ -1,0 +1,32 @@
+<div class="panel panel-default spacer">
+    <div class="panel-heading">
+        <?php echo $this->translate('All tickets') ?>
+    </div>
+    <div class="panel-body">
+        <?php foreach ($this->paginator as $item) : ?>
+            <?php $user = $item->getUser() ?>
+            <div class="row">
+                <div class="col-sm-4"><?php echo $item->getName() ?></div>
+                <div class="col-sm-2"><?php echo $user->getUsername() ?></div>
+                <div class="col-sm-2"><?php echo $this->dateFormat($item->getDate(), IntlDateFormatter::MEDIUM) ?></div>
+                <div class="col-sm-2"><?php ?></div>
+            </div>
+        <?php endforeach ?>
+    </div>
+</div>
+<?php
+echo $this->paginationControl($this->paginator,
+    'Sliding',
+    'partial/pagination.phtml',
+    array('action' => 'index')
+);
+?>
+<?php
+foreach ($this->paginator as $item) {
+    echo $item->getName();
+}
+
+
+
+
+?>
