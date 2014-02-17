@@ -12,6 +12,8 @@ namespace Application;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
+use Zend\Permissions\Acl;
+
 class Module
 {
     public function onBootstrap(MvcEvent $e)
@@ -23,7 +25,8 @@ class Module
         $translator = $e->getApplication()->getServiceManager()->get('translator');
         $translator->setLocale('bg_BG')->setFallbackLocale('en_US');
 
-
+        $this->initAcl($e);
+        $e->getApplication()->getEventManager()->attach('route', array($this, 'checkAcl'));
     }
 
     public function getConfig()
@@ -52,5 +55,57 @@ class Module
                     }
             )
         );
+    }
+
+    public function initAcl(MvcEvent $e)
+    {
+
+        $acl = new \Zend\Permissions\Acl\Acl();
+        $roles = include __DIR__ . '/config/module.acl.roles.php';
+        $allResources = array();
+        foreach ($roles as $role => $resources) {
+
+            $role = new \Zend\Permissions\Acl\Role\GenericRole($role);
+            $acl->addRole($role);
+
+            $allResources = array_merge($resources, $allResources);
+
+            //adding resources
+            foreach ($resources as $resource) {
+                // Edit 4
+                if (!$acl->hasResource($resource))
+                    $acl->addResource(new \Zend\Permissions\Acl\Resource\GenericResource($resource));
+            }
+            //adding restrictions
+            foreach ($allResources as $resource) {
+                $acl->allow($role, $resource);
+            }
+        }
+
+        //testing
+        var_dump($acl->isAllowed('guest', 'auth/login'));
+        //true
+
+        //setting to view
+        $e->getViewModel()->acl = $acl;
+
+    }
+
+    public function checkAcl(MvcEvent $e)
+    {
+        $route = $e->getRouteMatch()->getMatchedRouteName();
+        //you set your role
+        $userRole = 'guest';
+
+        if ($e->getViewModel()->acl->hasResource($route) && !$e->getViewModel()->acl->isAllowed($userRole, $route)) {
+
+            //Redirect to Login
+            $url = $e->getRouter()->assemble(array(), array('name' => 'auth/login'));
+            $response = $e->getResponse();
+            $response->getHeaders()->addHeaderLine('Location', $url);
+            $response->setStatusCode(302);
+            $response->sendHeaders();
+            exit;
+        }
     }
 }
