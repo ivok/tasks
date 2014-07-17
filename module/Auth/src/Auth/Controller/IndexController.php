@@ -88,12 +88,12 @@ class IndexController extends AbstractActionController
     public function registerAction()
     {
         $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $user = new User();
+        $user = new AccountEntity();
         $builder = new AnnotationBuilder($em);
 
-        $form = $builder->createForm('Auth\Entity\User');
-//        $form->setHydrator(new DoctrineHydrator($em, 'Application\Entity\User'))->bind($user);
-        $form->setValidationGroup('username', 'password', 'confirmPassword');
+        $form = $builder->createForm('Auth\Entity\AccountEntity');
+        $form->setHydrator(new DoctrineHydrator($em, 'Auth\Entity\AccountEntity'))->bind($user);
+        $form->setValidationGroup('email', 'username', 'password', 'confirmPassword');
         $request = $this->getRequest();
 
         if ($request->isPost()) {
@@ -101,7 +101,8 @@ class IndexController extends AbstractActionController
             $data = $request->getPost();
 
             if ($form->isValid()) {
-                if ($em->getRepository('Auth\Entity\User')->findOneBy(array('username' => $data->username)) !== null) {
+
+                if ($em->getRepository('Auth\Entity\AccountEntity')->findOneBy(array('username' => $data->username)) !== null) {
                     return new ViewModel(array(
                         'form' => $form,
                         'message' => 'Username already exists',
@@ -116,7 +117,6 @@ class IndexController extends AbstractActionController
                         'hideForm' => false,
                     ));
                 }
-
                 $em->persist($user);
                 $em->flush();
 
@@ -132,50 +132,5 @@ class IndexController extends AbstractActionController
             'form' => $form,
             'hideForm' => false,
         ));
-    }
-
-    public function settingsAction()
-    {
-        if ($this->identity()) {
-
-            $user = $this->identity();
-            $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-
-            $builder = new AnnotationBuilder($em);
-
-            $form = $builder->createForm('Auth\Entity\User');
-            $form->setHydrator(new DoctrineHydrator($em, 'Auth\Entity\User'));
-            $form->setValidationGroup('username', 'password');
-
-            $request = $this->getRequest();
-
-            if ($request->isPost()) {
-                $form->setData($request->getPost());
-                $data = $request->getPost();
-
-                if ($form->isValid()) {
-                    if (md5($data->password) == $user->getPassword()) {
-
-                        $user->setUsername($data->username);
-                        $user->setName($data->name);
-                        $user->setPhone($data->phone);
-                        $user->setEmail($data->email);
-                        $user->setDescription($data->description);
-
-                        $em->persist($user);
-                        $em->flush();
-
-                        $message = 'Successfully updated';
-                    }
-                }
-            }
-
-            return new ViewModel(array(
-                'form' => $form,
-                'message' => $message,
-            ));
-        }
-
-        return redirect('login');
     }
 }

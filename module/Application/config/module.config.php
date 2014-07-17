@@ -10,22 +10,6 @@
 return array(
     'router' => array(
         'routes' => array(
-            'tickets' => array(
-                'type' => 'segment',
-                'options' => array(
-                    'route' => '/tickets[/][:action][/:page]',
-                    'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'page' => '[0-9]+',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Tickets',
-                        'action' => 'index',
-                        'page' => 1,
-                    ),
-                ),
-                'may_terminate' => true,
-            ),
             //Index Controller
             'home' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
@@ -79,6 +63,10 @@ return array(
         'factories' => array(
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
         ),
+        'invokables' => array(
+            'SendSms' => 'Application\Service\SendSms',
+            'SendEmail' => 'Application\Service\SendEmail',
+        ),
     ),
     'translator' => array(
         'locale' => 'en_US',
@@ -126,7 +114,6 @@ return array(
                 'cache' => 'array',
                 'paths' => array(__DIR__ . '/../src/Application/Entity')
             ),
-
             'orm_default' => array(
                 'drivers' => array(
                     'Application\Entity' => 'application_entities',
@@ -138,7 +125,7 @@ return array(
         'default' => array(
             array(
                 'label' => 'Tickets',
-                'route' => 'tickets',
+                'route' => 'home',
                 'pages' => array(
 //                    array(
 //                        'label' => 'All',

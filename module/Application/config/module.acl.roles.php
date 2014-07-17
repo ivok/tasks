@@ -9,9 +9,10 @@
 return array(
     'guest' => array(
         'auth/login',
+        'auth/register',
     ),
     'user' => array(
         'home',
-        'logout',
+        'auth/logout',
     ),
 );

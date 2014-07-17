@@ -9,13 +9,17 @@
 
 namespace Application;
 
+use Application\Service\SendEmail;
+use Application\Service\SendSms;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-
+use Zend\EventManager\Event;
 use Zend\Permissions\Acl;
 
 class Module
 {
+    protected $authService;
+
     public function onBootstrap(MvcEvent $e)
     {
         $eventManager = $e->getApplication()->getEventManager();
@@ -24,6 +28,8 @@ class Module
 
         $translator = $e->getApplication()->getServiceManager()->get('translator');
         $translator->setLocale('bg_BG')->setFallbackLocale('en_US');
+
+        $this->authService = $e->getApplication()->getServiceManager()->get('Zend\Authentication\AuthenticationService');
 
         $this->initAcl($e);
         $e->getApplication()->getEventManager()->attach('route', array($this, 'checkAcl'));
@@ -59,7 +65,6 @@ class Module
 
     public function initAcl(MvcEvent $e)
     {
-
         $acl = new \Zend\Permissions\Acl\Acl();
         $roles = include __DIR__ . '/config/module.acl.roles.php';
         $allResources = array();
@@ -82,11 +87,6 @@ class Module
             }
         }
 
-        //testing
-        var_dump($acl->isAllowed('guest', 'auth/login'));
-        //true
-
-        //setting to view
         $e->getViewModel()->acl = $acl;
 
     }
@@ -95,7 +95,12 @@ class Module
     {
         $route = $e->getRouteMatch()->getMatchedRouteName();
         //you set your role
-        $userRole = 'guest';
+
+        if ($this->authService->hasIdentity()) {
+            $userRole = 'user';
+        } else {
+            $userRole = 'guest';
+        }
 
         if ($e->getViewModel()->acl->hasResource($route) && !$e->getViewModel()->acl->isAllowed($userRole, $route)) {
 
