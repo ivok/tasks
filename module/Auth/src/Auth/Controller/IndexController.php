@@ -57,8 +57,11 @@ class IndexController extends AbstractActionController
                         $session = new SessionManager();
                         $session->forgetMe();
                     }
+
                     return $this->redirect()->toRoute('home');
                 }
+
+
 
                 return new ViewModel(array(
                         'form' => $form,
@@ -70,6 +73,7 @@ class IndexController extends AbstractActionController
 
         return new ViewModel(array(
             'form' => $form,
+            'test' => 'kur'
         ));
     }
 

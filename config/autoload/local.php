@@ -18,11 +18,11 @@ return array(
                 'orm_default' => array(
                     'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
                     'params' => array(
-                        'host'     => 'localhost',
+                        'host'     => '192.168.110.37',
                         'port'     => '3306',
                         'user'     => 'root',
                         'password' => '1',
-                        'dbname'   => 'tickets',
+                        'dbname'   => 'application_test',
                     )
                 )
             )

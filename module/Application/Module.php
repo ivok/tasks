@@ -9,11 +9,8 @@
 
 namespace Application;
 
-use Application\Service\SendEmail;
-use Application\Service\SendSms;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-use Zend\EventManager\Event;
 use Zend\Permissions\Acl;
 
 class Module

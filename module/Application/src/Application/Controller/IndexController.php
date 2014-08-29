@@ -9,15 +9,14 @@
 
 namespace Application\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use Application\Controller\CommonController\CommonController;
+use Zend\Mvc\Application;
 use Zend\View\Model\ViewModel;
-
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Zend\Paginator\Paginator;
-use Application\Service\Complete;
 
-class IndexController extends AbstractActionController
+class IndexController extends CommonController
 {
     public function indexAction()
     {
@@ -37,7 +36,6 @@ class IndexController extends AbstractActionController
 //        return new ViewModel(array(
 //            'paginator' => $paginator,
 //        ));
-
 
         $this->getEventManager()->attachAggregate($this->getServiceLocator()->get('SendSms'));
         $this->getEventManager()->attachAggregate($this->getServiceLocator()->get('SendEmail'));
